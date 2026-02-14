@@ -1,95 +1,566 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harsha Enterprises | Industrial Supplies & Cotton Waste Supplier in Bangalore</title>
-  <meta name="description" content="Harsha Enterprises is a trusted market supplies distributor in Bangalore. We supply cotton waste cloth, industrial safety products, packing items, painting thinners, abrasives and industrial consumables in bulk." />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Harsha Enterprises" />
-  <meta property="og:description" content="Industrial Supplies & Cotton Waste Cloth Supplier in Bangalore" />
-  <meta property="og:type" content="website" />
+  <title>Harsha Enterprises | Industrial Supplies & Cotton Waste Cloth - Bangalore</title>
+  <meta name="description" content="Harsha Enterprises is a trusted market supplies distributor in Bangalore. We supply cotton waste cloth, industrial safety products, packing items, painting thinners, abrasives and all industrial consumables in bulk." />
+  <meta name="keywords" content="Harsha Enterprises, cotton waste cloth supplier Bangalore, industrial consumables Bangalore, safety products supplier, packing items, abrasives, painting thinners" />
 
   <style>
     :root{
       --bg:#0b1220;
-      --card:#101a33;
-      --muted:#94a3b8;
-      --text:#e6edf7;
-      --accent:#4f8cff;
-      --accent2:#22c55e;
-      --border:rgba(255,255,255,0.08);
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-      --radius: 18px;
+      --card:#0f1b33;
+      --muted:#8ea0c4;
+      --text:#eaf0ff;
+      --brand:#5eead4;
+      --brand2:#60a5fa;
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius:18px;
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(96,165,250,.25), transparent 55%),
+                  radial-gradient(900px 700px at 80% 15%, rgba(94,234,212,.18), transparent 55%),
+                  linear-gradient(180deg, #070b14 0%, #0b1220 45%, #070b14 100%);
       color:var(--text);
-      background: radial-gradient(1000px 600px at 20% 10%, rgba(79,140,255,0.25), transparent 55%),
-                  radial-gradient(900px 600px at 80% 20%, rgba(34,197,94,0.12), transparent 55%),
-                  linear-gradient(180deg, #070b14 0%, #0b1220 40%, #070b14 100%);
-      line-height:1.6;
+      line-height:1.55;
     }
 
-    a{color:inherit; text-decoration:none}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px, 92%); margin:0 auto}
 
-    .container{
-      width:min(1120px, calc(100% - 40px));
-      margin:0 auto;
-    }
-
-    /* Top Bar */
-    .topbar{
+    /* NAV */
+    .nav{
       position:sticky;
       top:0;
       z-index:50;
       backdrop-filter: blur(14px);
-      background: rgba(7,11,20,0.55);
+      background: rgba(7,11,20,.55);
       border-bottom:1px solid var(--border);
     }
-    .topbar-inner{
+    .nav-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
       padding:14px 0;
-      gap:14px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
       gap:12px;
-      min-width: 260px;
     }
     .logo{
-      width:42px;
-      height:42px;
-      border-radius:14px;
-      background: linear-gradient(135deg, rgba(79,140,255,1), rgba(34,197,94,0.85));
-      box-shadow: 0 10px 30px rgba(79,140,255,0.25);
-      display:grid;
-      place-items:center;
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .mark{
+      width:38px; height:38px;
+      border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      display:grid; place-items:center;
+      color:#081022;
       font-weight:900;
-      letter-spacing:0.5px;
-      color:#06101f;
+      box-shadow: 0 10px 30px rgba(96,165,250,.18);
     }
-    .brand h1{
-      font-size:15px;
-      margin:0;
-      line-height:1.15;
-      letter-spacing:0.2px;
+    .nav-links{
+      display:flex; gap:18px;
+      font-size:14px;
+      color: rgba(234,240,255,.85);
     }
-    .brand p{
-      margin:0;
-      font-size:12px;
-      color:var(--muted);
+    .nav-links a{opacity:.9}
+    .nav-links a:hover{opacity:1; color: var(--brand)}
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:600;
+      font-size:14px;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(94,234,212,.35)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(94,234,212,.18), rgba(96,165,250,.18));
+      border-color: rgba(94,234,212,.25);
     }
 
-    nav{
-      display:flex;
+    /* HERO */
+    .hero{
+      padding:56px 0 28px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:28px;
+      align-items:stretch;
+    }
+    .badge{
+      display:inline-flex;
+      gap:10px;
       align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: rgba(234,240,255,.85);
+      font-size:13px;
+      width: fit-content;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(94,234,212,.12);
+    }
+    h1{
+      margin:14px 0 12px;
+      font-size: clamp(30px, 4.2vw, 46px);
+      line-height:1.1;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      color: rgba(234,240,255,.78);
+      font-size: 16px;
+      max-width: 56ch;
+    }
+    .hero-actions{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .hero-card{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .hero-card h3{margin:0 0 8px; font-size:16px}
+    .hero-card p{margin:0; color: rgba(234,240,255,.78); font-size:14px}
+    .mini{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      border-radius: 16px;
+      padding:14px;
+    }
+    .stat b{display:block; font-size:16px}
+    .stat span{color: rgba(234,240,255,.75); font-size:13px}
+
+    /* SECTIONS */
+    section{padding:34px 0}
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing:-.2px;
+    }
+    .section-title p{
+      margin:0;
+      color: rgba(234,240,255,.72);
+      font-size:14px;
+      max-width: 60ch;
+    }
+
+    /* CARDS */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.22);
+      transition:.2s ease;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(96,165,250,.25)}
+    .icon{
+      width:42px; height:42px;
+      border-radius:14px;
+      background: rgba(96,165,250,.12);
+      border:1px solid rgba(96,165,250,.18);
+      display:grid; place-items:center;
+      font-size:18px;
+      margin-bottom:10px;
+    }
+    .card h3{margin:0 0 6px; font-size:16px}
+    .card p{margin:0; color: rgba(234,240,255,.72); font-size:14px}
+
+    /* ABOUT */
+    .about{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    .about .card{height:100%}
+    ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color: rgba(234,240,255,.78);
+      font-size:14px;
+    }
+    li{margin:6px 0}
+
+    /* CONTACT */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+    }
+    .contact a.link{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      margin-top:10px;
+      font-weight:600;
+      font-size:14px;
+    }
+    .contact a.link:hover{border-color: rgba(94,234,212,.3)}
+    .pill{
+      display:inline-flex;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      color: rgba(234,240,255,.8);
+      font-size:13px;
+      gap:8px;
+      align-items:center;
+      width: fit-content;
+    }
+
+    iframe{
+      width:100%;
+      height:340px;
+      border:0;
+      border-radius: 18px;
+      overflow:hidden;
+    }
+
+    /* FOOTER */
+    footer{
+      padding:22px 0 40px;
+      border-top:1px solid var(--border);
+      color: rgba(234,240,255,.65);
+      font-size:13px;
+    }
+
+    /* WHATSAPP FLOAT */
+    .wa{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:100;
+      padding:12px 14px;
+      border-radius:999px;
+      background: linear-gradient(135deg, rgba(94,234,212,.2), rgba(96,165,250,.2));
+      border:1px solid rgba(94,234,212,.25);
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-weight:800;
+      backdrop-filter: blur(12px);
+    }
+    .wa:hover{transform: translateY(-1px)}
+    .wa span{font-size:14px}
+
+    /* RESPONSIVE */
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="logo">
+        <div class="mark">HE</div>
+        <div>
+          <div style="font-size:15px;">Harsha Enterprises</div>
+          <div style="font-size:12px; color: rgba(234,240,255,.65); margin-top:1px;">
+            Industrial Supplies • Cotton Waste Cloth • Bangalore
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#location">Location</a>
+      </div>
+
+      <div class="cta">
+        <a class="btn primary" href="tel:+918892660649">📞 Call</a>
+        <a class="btn" href="https://wa.me/918892660649" target="_blank">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge"><span class="dot"></span> Bulk Supply • Quick Response • Trusted Distributor</div>
+        <h1>Industrial Supplies & Cotton Waste Cloth Supply in Bangalore</h1>
+        <p class="sub">
+          <b>Harsha Enterprises</b> is a market supplies distributor serving industries across Bangalore.
+          We supply <b>cotton waste cloth</b>, <b>industrial safety products</b>, <b>packing items</b>,
+          <b>painting thinners</b>, <b>abrasives</b> and all industrial consumables in bulk.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="https://wa.me/918892660649" target="_blank">💬 Get Quote on WhatsApp</a>
+          <a class="btn" href="mailto:Harshaenterprises4993@gmail.com">📩 Email Us</a>
+          <a class="btn" href="#services">📦 View Products</a>
+        </div>
+
+        <div class="mini">
+          <div class="stat">
+            <b>Bulk Supply</b>
+            <span>Best pricing for industries & businesses</span>
+          </div>
+          <div class="stat">
+            <b>All Days Open</b>
+            <span>9:00 AM to 6:00 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Quick Contact</h3>
+        <p>For bulk orders & enquiries, contact us anytime during business hours.</p>
+
+        <a class="link" href="tel:+918892660649" style="display:flex; gap:10px; align-items:center; margin-top:12px;">
+          📞 <span>+91 8892660649</span>
+        </a>
+
+        <a class="link" href="https://wa.me/918892660649" target="_blank" style="display:flex; gap:10px; align-items:center;">
+          💬 <span>WhatsApp Enquiry</span>
+        </a>
+
+        <a class="link" href="mailto:Harshaenterprises4993@gmail.com" style="display:flex; gap:10px; align-items:center;">
+          📩 <span>Harshaenterprises4993@gmail.com</span>
+        </a>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="pill">📍 Bangalore</span>
+          <span class="pill">🏭 Industrial Consumables</span>
+          <span class="pill">🧵 Cotton Waste Cloth</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Products & Supplies</h2>
+          <p>We supply the below items in bulk for industries, factories, warehouses, and commercial clients.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🧵</div>
+          <h3>Cotton Waste Cloth Supply</h3>
+          <p>Bulk cotton waste cloth supply for cleaning, maintenance and industrial usage.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🦺</div>
+          <h3>Industrial Safety Products</h3>
+          <p>Safety gloves, masks, helmets, shoes and other industrial safety consumables.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">📦</div>
+          <h3>Industrial Packing Items</h3>
+          <p>Packing materials required for dispatch, storage and warehouse operations.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎨</div>
+          <h3>Painting Thinners</h3>
+          <p>Industrial-grade thinners and painting consumables for workshops & factories.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧱</div>
+          <h3>Abrasives</h3>
+          <p>Grinding, polishing and finishing abrasives for industrial applications.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🏭</div>
+          <h3>All Industrial Consumables</h3>
+          <p>One-stop supply for regular industrial consumables in bulk with reliable service.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>About Harsha Enterprises</h2>
+          <p>A trusted industrial market supplies distributor serving Bangalore.</p>
+        </div>
+      </div>
+
+      <div class="about">
+        <div class="card">
+          <h3>Who we are</h3>
+          <p>
+            Harsha Enterprises is a Bangalore-based distributor focused on providing industrial supplies in bulk.
+            We aim to deliver quality products, competitive pricing and dependable service for industrial clients.
+          </p>
+          <ul>
+            <li>Bulk supply for industries & businesses</li>
+            <li>Quick response for enquiries</li>
+            <li>Reliable and consistent supply</li>
+            <li>Serving all areas across Bangalore</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Why choose us</h3>
+          <p>
+            We understand industrial needs — regular consumables should never delay operations.
+            Our focus is to ensure smooth supply and easy ordering.
+          </p>
+          <ul>
+            <li>Trusted local distributor</li>
+            <li>Wide range of industrial consumables</li>
+            <li>Support on WhatsApp for fast ordering</li>
+            <li>All days open: 9 AM – 6 PM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Contact Us</h2>
+          <p>Call, WhatsApp or email us for bulk orders and pricing.</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="card">
+          <h3>Reach us instantly</h3>
+
+          <a class="link" href="tel:+918892660649">📞 Call: +91 8892660649</a>
+          <a class="link" href="https://wa.me/918892660649" target="_blank">💬 WhatsApp: Click to Chat</a>
+          <a class="link" href="mailto:Harshaenterprises4993@gmail.com">📩 Email: Harshaenterprises4993@gmail.com</a>
+
+          <div style="margin-top:14px;">
+            <div class="pill">🕘 Open All Days: 9:00 AM – 6:00 PM</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Service Area</h3>
+          <p>
+            We are located in Bangalore and supply across the city. Bulk orders for industries,
+            factories, warehouses and commercial customers are welcome.
+          </p>
+          <ul>
+            <li>All Bangalore Areas</li>
+            <li>Bulk industrial supply</li>
+            <li>Fast WhatsApp enquiries</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Location</h2>
+          <p>Find us on Google Maps using the coordinates you provided.</p>
+        </div>
+      </div>
+
+      <div class="card" style="padding:12px;">
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=13.18720424651858,77.28469462481792&z=16&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;">
+      <div>
+        © <span id="year"></span> <b>Harsha Enterprises</b> • Industrial Supplies & Cotton Waste Cloth • Bangalore
+      </div>
+      <div style="opacity:.85">
+        Phone: <a href="tel:+918892660649">8892660649</a> • Email: <a href="mailto:Harshaenterprises4993@gmail.com">Harshaenterprises4993@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a class="wa" href="https://wa.me/918892660649" target="_blank" aria-label="WhatsApp Harsha Enterprises">
+    💬 <span>WhatsApp</span>
+  </a>
+
+  <script>
+    // Auto year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
