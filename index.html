@@ -6,180 +6,163 @@
 <title>Harsha Enterprises</title>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f5f7fa;
-}
+body { font-family: Arial; margin:0; background:#f5f7fa; }
 
 /* HEADER */
-header {
-  background: #0d1b2a;
-  color: white;
-  padding: 15px;
-  text-align: center;
-}
-
-/* HERO */
-.hero {
-  position: relative;
-}
-.hero img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-}
-.hero h1 {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  color: white;
-}
+header { background:#0d1b2a; color:white; text-align:center; padding:15px; }
 
 /* GRID */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px; padding:20px;
 }
 
-/* CATEGORY CARD */
+/* CARD */
 .card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-  cursor: pointer;
-  transition: 0.3s;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  cursor:pointer;
 }
-.card:hover {
-  transform: scale(1.05);
+.card img { width:100%; height:180px; object-fit:cover; }
+
+/* PRODUCT */
+.product { background:white; padding:10px; border-radius:10px; text-align:center; }
+.product img { width:100%; height:150px; object-fit:cover; }
+
+/* BUTTONS */
+.btn { padding:5px 10px; margin:3px; cursor:pointer; }
+
+/* CART */
+#cartIcon {
+  position:fixed; top:20px; right:20px;
+  background:#0d1b2a; color:white;
+  padding:10px; border-radius:50%;
+  cursor:pointer;
 }
 
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+#cartBox {
+  position:fixed; right:0; top:0;
+  width:300px; height:100%;
+  background:white; box-shadow:-2px 0 10px rgba(0,0,0,0.2);
+  display:none; padding:15px; overflow:auto;
 }
-
-.card h3 {
-  text-align: center;
-  padding: 10px;
-}
-
-/* SUB PRODUCTS */
-#subProducts {
-  display: none;
-}
-
-.back-btn {
-  margin: 20px;
-  padding: 10px 15px;
-  border: none;
-  background: #0d1b2a;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.product {
-  background: white;
-  padding: 10px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.product img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
 </style>
 </head>
 
 <body>
 
-<header>
-  <h2>Harsha Enterprises</h2>
-</header>
+<header><h2>Harsha Enterprises</h2></header>
 
-<!-- HERO -->
-<div class="hero">
-  <img src="images/banner.jpg">
-  <h1>Industrial Supplies & Cotton Waste</h1>
+<div id="cartIcon" onclick="toggleCart()">🛒 <span id="cartCount">0</span></div>
+
+<div id="cartBox">
+<h3>Your Cart</h3>
+<div id="cartItems"></div>
+<button onclick="checkout()">Send via WhatsApp</button>
 </div>
 
-<!-- MAIN CATEGORIES -->
-<div id="categories" class="grid">
+<!-- MAIN -->
+<div id="main" class="grid"></div>
 
-  <div class="card" onclick="showProducts('abrasives')">
-    <img src="images/abrasives-cover.jpg">
-    <h3>Abrasives</h3>
-  </div>
+<!-- LEVEL 2 -->
+<div id="level2" class="grid" style="display:none;"></div>
 
-  <div class="card" onclick="showProducts('packing')">
-    <img src="images/packing-cover.jpg">
-    <h3>Packing Materials</h3>
-  </div>
-
-  <div class="card" onclick="showProducts('cotton')">
-    <img src="images/cotton-cover.jpg">
-    <h3>Cotton Waste</h3>
-  </div>
-
-</div>
-
-<!-- SUB PRODUCTS -->
-<div id="subProducts">
-  <button class="back-btn" onclick="goBack()">← Back</button>
-  <div id="productList" class="grid"></div>
-</div>
+<!-- LEVEL 3 -->
+<div id="level3" class="grid" style="display:none;"></div>
 
 <script>
+const phone = "918892660649";
+
 const data = {
-  abrasives: [
-    {name: "Grinding Wheel", img: "images/grinding.jpg"},
-    {name: "Polishing Disc", img: "images/polish.jpg"}
-  ],
+  cotton: {
+    name:"Cotton Waste",
+    categories:{
+      "White Banian Cloth (WHP)": ["cotton1.jpg","cotton2.jpg"],
+      "Color Cloth Waste": ["cotton3.jpg"],
+      "Others": ["cotton4.jpg"]
+    }
+  },
 
-  packing: [
-    {name: "Stretch Film", img: "images/stretch.jpg"},
-    {name: "Bubble Roll", img: "images/bubble.jpg"},
-    {name: "Foam Roll", img: "images/foam.jpg"},
-    {name: "PP Covers", img: "images/pp.jpg"}
-  ],
-
-  cotton: [
-    {name: "White Cotton Waste", img: "images/cotton1.jpg"},
-    {name: "Colored Cotton Waste", img: "images/cotton2.jpg"}
-  ]
+  abrasives:{
+    name:"Abrasives",
+    categories:{
+      "Sandpaper":["sand1.jpg"],
+      "Grinding Wheels":["grind1.jpg"],
+      "Others":["other.jpg"]
+    }
+  }
 };
 
-function showProducts(category) {
-  document.getElementById("categories").style.display = "none";
-  document.getElementById("subProducts").style.display = "block";
+let cart = {};
 
-  const list = document.getElementById("productList");
-  list.innerHTML = "";
+function loadMain(){
+  main.innerHTML="";
+  for(let key in data){
+    main.innerHTML+=`
+    <div class="card" onclick="openLevel2('${key}')">
+      <img src="images/${key}-cover.jpg">
+      <h3>${data[key].name}</h3>
+    </div>`;
+  }
+}
 
-  data[category].forEach(item => {
-    list.innerHTML += `
-      <div class="product">
-        <img src="${item.img}">
-        <p>${item.name}</p>
-      </div>
-    `;
+function openLevel2(key){
+  main.style.display="none";
+  level2.style.display="grid";
+  level2.innerHTML="";
+
+  for(let cat in data[key].categories){
+    level2.innerHTML+=`
+    <div class="card" onclick="openLevel3('${key}','${cat}')">
+      <h3>${cat}</h3>
+    </div>`;
+  }
+}
+
+function openLevel3(key,cat){
+  level2.style.display="none";
+  level3.style.display="grid";
+  level3.innerHTML="";
+
+  data[key].categories[cat].forEach(img=>{
+    level3.innerHTML+=`
+    <div class="product">
+      <img src="images/${img}">
+      <p>${cat}</p>
+      <button onclick="addToCart('${cat}')">Add</button>
+    </div>`;
   });
 }
 
-function goBack() {
-  document.getElementById("categories").style.display = "grid";
-  document.getElementById("subProducts").style.display = "none";
+function addToCart(item){
+  cart[item]=(cart[item]||0)+1;
+  updateCart();
 }
+
+function updateCart(){
+  cartCount.innerText=Object.values(cart).reduce((a,b)=>a+b,0);
+  cartItems.innerHTML="";
+  for(let i in cart){
+    cartItems.innerHTML+=`${i} - ${cart[i]}<br>`;
+  }
+}
+
+function toggleCart(){
+  cartBox.style.display=cartBox.style.display==="block"?"none":"block";
+}
+
+function checkout(){
+  let msg="Order:%0A";
+  for(let i in cart){
+    msg+=`${i} - ${cart[i]}%0A`;
+  }
+  window.open(`https://wa.me/${phone}?text=${msg}`);
+}
+
+loadMain();
 </script>
 
 </body>
