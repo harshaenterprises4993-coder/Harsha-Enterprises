@@ -170,40 +170,42 @@ footer {
 <script>
 const phone = "918892660649";
 
+
 const products = [
-    "Safety Gloves",
-    "Safety Helmets",
-    "Safety Shoes",
-    "Safety Masks",
-    "Other Industrial Safety Products"
+    { name: "Safety Gloves", cart: true },
+    { name: "Safety Helmets", cart: true },
+    { name: "Safety Shoes", cart: true },
+    { name: "Safety Masks", cart: true },
+    { name: "Other Industrial Safety Products", cart: false }
 ];
 
 const cart = [];
 
 const grid = document.getElementById("productGrid");
 
-products.forEach((name, index) => {
+products.forEach((product, index) => {
     const message = encodeURIComponent(
-        "Hello Harsha Enterprises, I need a quotation for " + name + "."
+        "Hello Harsha Enterprises, I need a quotation for " + product.name + "."
     );
 
     grid.innerHTML += `
         <div class="product-card">
             <img src="images/industrial-safety.avif"
-                 alt="${name}">
-            <h3>${name}</h3>
+                 alt="${product.name}">
+            <h3>${product.name}</h3>
 
-            <div class="qty-controls">
-                <button onclick="changeQty(${index}, -1)">−</button>
-                <input type="number" id="qty${index}"
-                       value="1" min="1">
-                <button onclick="changeQty(${index}, 1)">+</button>
-            </div>
+            ${product.cart ? `
+                <div class="qty-controls">
+                    <button onclick="changeQty(${index}, -1)">−</button>
+                    <input type="number" id="qty${index}" value="1" min="1">
+                    <button onclick="changeQty(${index}, 1)">+</button>
+                </div>
 
-            <button class="action-btn add-btn"
-                    onclick="addToCart(${index})">
-                Add to Cart
-            </button>
+                <button class="action-btn add-btn"
+                        onclick="addToCart(${index})">
+                    Add to Cart
+                </button>
+            ` : ""}
 
             <a class="action-btn whatsapp-btn"
                href="https://wa.me/${phone}?text=${message}"
@@ -213,6 +215,7 @@ products.forEach((name, index) => {
         </div>
     `;
 });
+
 
 function changeQty(index, amount) {
     const input = document.getElementById("qty" + index);
