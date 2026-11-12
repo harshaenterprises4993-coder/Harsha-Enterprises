@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotton Cloth Waste | Harsha Enterprises</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f9;
+    color: #243247;
+}
+header {
+    background: #102b50;
+    color: white;
+    padding: 22px;
+    text-align: center;
+}
+header a { color: white; text-decoration: none; }
+.container { max-width: 1100px; margin: auto; padding: 25px 15px; }
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 22px;
+}
+.card {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #00000012;
+}
+.card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.card h3 { margin-bottom: 8px; }
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 15px 0;
+}
+.quantity button {
+    padding: 7px 13px;
+    cursor: pointer;
+}
+.quantity input {
+    width: 55px;
+    padding: 8px;
+    text-align: center;
+}
+.action {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 9px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
+}
+.add { background: #173f70; }
+.enquire { background: #25D366; }
+.cart {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+.order { background: #128C7E; }
+.back { color: #173f70; text-decoration: none; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>HARSHA ENTERPRISES</h1>
+    <p>Industrial Supply Solutions</p>
+    <a href="index.html">← Back to Home</a>
+</header>
+
+<div class="container">
+    <h2>Cotton Cloth Waste</h2>
+    <p>Industrial cotton waste and cleaning cloth products.</p>
+
+    <div class="products">
+
+        <div class="card">
+            <img src="images/cotton-waste.avif" alt="White cotton waste">
+            <h3>White Cotton Waste</h3>
+            <p>White cotton waste for industrial cleaning applications.</p>
+            <div class="quantity">
+                <button onclick="changeQty(this,-1)">−</button>
+                <input type="number" min="1" value="1">
+                <button onclick="changeQty(this,1)">+</button>
+            </div>
+            <button class="action add" onclick="addCart(this,'White Cotton Waste')">Add to Cart</button>
+            <a class="action enquire" href="https://wa.me/918892660649?text=I%20am%20interested%20in%20White%20Cotton%20Waste">Enquire on WhatsApp</a>
+        </div>
+
+        <div class="card">
+            <img src="images/cotton-waste.avif" alt="Colour cotton waste">
+            <h3>Colour Cotton Waste</h3>
+            <p>Colour cotton waste for general industrial use.</p>
+            <div class="quantity">
+                <button onclick="changeQty(this,-1)">−</button>
+                <input type="number" min="1" value="1">
+                <button onclick="changeQty(this,1)">+</button>
+            </div>
+            <button class="action add" onclick="addCart(this,'Colour Cotton Waste')">Add to Cart</button>
+            <a class="action enquire" href="https://wa.me/918892660649?text=I%20am%20interested%20in%20Colour%20Cotton%20Waste">Enquire on WhatsApp</a>
+        </div>
+
+        <div class="card">
+            <img src="images/cotton-waste.avif" alt="Industrial cleaning cloth">
+            <h3>Industrial Cleaning Cloth</h3>
+            <p>Cotton wiping cloth for industrial machinery and maintenance.</p>
+            <div class="quantity">
+                <button onclick="changeQty(this,-1)">−</button>
+                <input type="number" min="1" value="1">
+                <button onclick="changeQty(this,1)">+</button>
+            </div>
+            <button class="action add" onclick="addCart(this,'Industrial Cleaning Cloth')">Add to Cart</button>
+            <a class="action enquire" href="https://wa.me/918892660649?text=I%20am%20interested%20in%20Industrial%20Cleaning%20Cloth">Enquire on WhatsApp</a>
+        </div>
+
+    </div>
+
+    <div class="cart">
+        <h2>My Shopping Cart (<span id="cartCount">0</span>)</h2>
+        <div id="cartItems">Your cart is empty.</div>
+        <button class="action order" onclick="sendOrder()">Order on WhatsApp</button>
+    </div>
+</div>
+
+<script>
+let cart = [];
+
+function changeQty(button, change) {
+    const input = button.parentElement.querySelector("input");
+    input.value = Math.max(1, (parseInt(input.value) || 1) + change);
+}
+
+function addCart(button, name) {
+    const quantity = Math.max(1, parseInt(
+        button.parentElement.querySelector("input").value
+    ) || 1);
+
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity += quantity;
+    } else {
+        cart.push({name, quantity});
+    }
+    renderCart();
+    alert(name + " added to cart.");
+}
+
+function renderCart() {
+    const area = document.getElementById("cartItems");
+    document.getElementById("cartCount").textContent =
+        cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    if (!cart.length) {
+        area.textContent = "Your cart is empty.";
+        return;
+    }
+
+    area.innerHTML = cart.map((item, index) =>
+        `<p>${item.name} — Quantity: ${item.quantity}
+        <button onclick="removeItem(${index})">Remove</button></p>`
+    ).join("");
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    renderCart();
+}
+
+function sendOrder() {
+    if (!cart.length) {
+        alert("Please add a product to your cart first.");
+        return;
+    }
+
+    let message = "Hello Harsha Enterprises, I would like to order:%0A";
+    cart.forEach(item => {
+        message += "%0A" + encodeURIComponent(item.name) +
+                   " - Quantity: " + item.quantity;
+    });
+    message += "%0A%0APlease share your best quotation.";
+
+    window.open("https://wa.me/918892660649?text=" + message, "_blank");
+}
+</script>
+
+</body>
+</html>
