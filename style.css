@@ -241,3 +241,19 @@ footer h3 {
     color: white;
 }
 
+/* View Products button */
+.view-products-btn {
+    display: inline-block;
+    background-color: #0b5ed7;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.view-products-btn:hover {
+    background-color: #084298;
+    color: white;
+}
