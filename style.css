@@ -200,3 +200,26 @@ footer h3 {
         padding: 45px 6%;
     }
 }
+
+
+/* Product image styling */
+.product-card {
+    overflow: hidden;
+}
+
+.product-photo {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Responsive product images */
+@media (max-width: 600px) {
+    .product-photo {
+        height: 160px;
+    }
+}
+
