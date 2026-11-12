@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Packing Materials | Harsha Enterprises</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    color: #222;
+}
+
+header {
+    background: #12345a;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #0b5ed7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-card h3 { color: #12345a; }
+
+.qty-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.qty-controls button {
+    padding: 7px 14px;
+    border: none;
+    background: #12345a;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.qty-controls input {
+    width: 55px;
+    padding: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.action-btn {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.add-btn { background: #0b5ed7; }
+.whatsapp-btn { background: #25D366; }
+
+.cart {
+    background: white;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+.cart-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.remove-btn {
+    color: #d00;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.order-btn {
+    background: #128C7E;
+    max-width: 350px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Harsha Enterprises</h1>
+    <p>Industrial Packing Materials</p>
+</header>
+
+<div class="container">
+
+<a class="back-link" href="index.html">← Back to Homepage</a>
+
+<h2>Our Packing Materials</h2>
+<p>Select products and quantities to request your quotation.</p>
+
+<div class="product-grid" id="productGrid"></div>
+
+<div class="cart">
+    <h2>Shopping Cart</h2>
+    <div id="cartItems">No products added yet.</div>
+    <h3 id="cartTotal">Total Items: 0</h3>
+
+    <button class="action-btn order-btn" onclick="sendOrder()">
+        Send Combined Enquiry on WhatsApp
+    </button>
+</div>
+
+</div>
+
+<footer>
+    Harsha Enterprises | Industrial Supply Solutions
+    <br>WhatsApp: 8892660649
+</footer>
+
+<script>
+const phone = "918892660649";
+
+const products = [
+    { name: "Stretch Film", cart: true },
+    { name: "Bubble Roll", cart: true },
+    { name: "Foam Roll", cart: true },
+    { name: "PP Covers", cart: true },
+    { name: "Rubber Mats", cart: true },
+    { name: "Other Packing Materials", cart: false }
+];
+
+const cart = [];
+
+const grid = document.getElementById("productGrid");
+
+products.forEach((product, index) => {
+    const message = encodeURIComponent(
+        "Hello Harsha Enterprises, I need a quotation for " + product.name + "."
+    );
+
+    grid.innerHTML += `
+        <div class="product-card">
+            <img src="images/packing-materials.avif"
+                 alt="${product.name}">
+            <h3>${product.name}</h3>
+
+            ${product.cart ? `
+                <div class="qty-controls">
+                    <button onclick="changeQty(${index}, -1)">−</button>
+                    <input type="number" id="qty${index}" value="1" min="1">
+                    <button onclick="changeQty(${index}, 1)">+</button>
+                </div>
+
+                <button class="action-btn add-btn"
+                        onclick="addToCart(${index})">
+                    Add to Cart
+                </button>
+            ` : ""}
+
+            <a class="action-btn whatsapp-btn"
+               href="https://wa.me/${phone}?text=${message}"
+               target="_blank">
+                Enquire on WhatsApp
+            </a>
+        </div>
+    `;
+});
+
+function changeQty(index, amount) {
+    const input = document.getElementById("qty" + index);
+    let value = parseInt(input.value) || 1;
+    input.value = Math.max(1, value + amount);
+}
+
+function addToCart(index) {
+    const name = products[index].name;
+    const qty = Number(document.getElementById("qty" + index).value);
+
+    if (!Number.isInteger(qty) || qty < 1) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+
+    const existing = cart.find(item => item.name === name);
+
+    if (existing) {
+        existing.qty += qty;
+    } else {
+        cart.push({ name: name, qty: qty });
+    }
+
+    renderCart();
+    alert(name + " added to cart.");
+}
+
+function renderCart() {
+    const area = document.getElementById("cartItems");
+    area.innerHTML = "";
+
+    let total = 0;
+
+    if (cart.length === 0) {
+        area.innerHTML = "No products added yet.";
+    }
+
+    cart.forEach((item, index) => {
+        total += item.qty;
+
+        area.innerHTML += `
+            <div class="cart-item">
+                <strong>${item.name}</strong>
+                — Quantity: ${item.qty}
+                <button class="remove-btn"
+                        onclick="removeItem(${index})">
+                    Remove
+                </button>
+            </div>
+        `;
+    });
+
+    document.getElementById("cartTotal").innerText =
+        "Total Items: " + total;
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    renderCart();
+}
+
+function sendOrder() {
+    if (cart.length === 0) {
+        alert("Please add products to your cart first.");
+        return;
+    }
+
+    let message = "Hello Harsha Enterprises,\n";
+    message += "Please send your best quotation for:\n\n";
+
+    cart.forEach(item => {
+        message += item.name + " - Quantity: " + item.qty + "\n";
+    });
+
+    message += "\nPlease confirm availability and best price.";
+
+    window.open(
+        "https://wa.me/" + phone + "?text=" +
+        encodeURIComponent(message),
+        "_blank"
+    );
+}
+</script>
+
+</body>
+</html>
