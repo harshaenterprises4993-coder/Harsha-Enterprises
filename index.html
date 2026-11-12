@@ -1,169 +1,150 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harsha Enterprises</title>
-
-<style>
-body { font-family: Arial; margin:0; background:#f5f7fa; }
-
-/* HEADER */
-header { background:#0d1b2a; color:white; text-align:center; padding:15px; }
-
-/* GRID */
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px; padding:20px;
-}
-
-/* CARD */
-.card {
-  background:white;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  cursor:pointer;
-}
-.card img { width:100%; height:180px; object-fit:cover; }
-
-/* PRODUCT */
-.product { background:white; padding:10px; border-radius:10px; text-align:center; }
-.product img { width:100%; height:150px; object-fit:cover; }
-
-/* BUTTONS */
-.btn { padding:5px 10px; margin:3px; cursor:pointer; }
-
-/* CART */
-#cartIcon {
-  position:fixed; top:20px; right:20px;
-  background:#0d1b2a; color:white;
-  padding:10px; border-radius:50%;
-  cursor:pointer;
-}
-
-#cartBox {
-  position:fixed; right:0; top:0;
-  width:300px; height:100%;
-  background:white; box-shadow:-2px 0 10px rgba(0,0,0,0.2);
-  display:none; padding:15px; overflow:auto;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsha Enterprises | Industrial Suppliers Bangalore</title>
+    <meta name="description" content="Harsha Enterprises supplies industrial consumables, safety products, packing materials, abrasives and cotton cloth waste in Bangalore.">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header><h2>Harsha Enterprises</h2></header>
+<header>
+    <div class="logo">HARSHA <span>ENTERPRISES</span></div>
 
-<div id="cartIcon" onclick="toggleCart()">🛒 <span id="cartCount">0</span></div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
-<div id="cartBox">
-<h3>Your Cart</h3>
-<div id="cartItems"></div>
-<button onclick="checkout()">Send via WhatsApp</button>
-</div>
+<section class="hero" id="home">
+    <div class="hero-content">
+        <p class="tagline">YOUR INDUSTRIAL SUPPLY PARTNER</p>
+        <h1>Quality Products.<br>Reliable Industrial Solutions.</h1>
+        <p>One-stop destination for industrial consumables,
+        safety products and packing materials.</p>
+        <a href="#products" class="btn">Explore Products</a>
+        <a href="#contact" class="btn secondary">Contact Us</a>
+    </div>
+</section>
 
-<!-- MAIN -->
-<div id="main" class="grid"></div>
+<section id="about">
+    <h2>About Harsha Enterprises</h2>
+    <p>
+        Harsha Enterprises is a Bangalore-based industrial
+        supply company providing quality industrial products
+        and reliable supply services to manufacturing industries.
+        We focus on quality, competitive pricing and customer
+        satisfaction.
+    </p>
+</section>
 
-<!-- LEVEL 2 -->
-<div id="level2" class="grid" style="display:none;"></div>
+<section id="products">
+    <h2>Our Product Categories</h2>
+    <p class="section-subtitle">
+        Complete industrial supply solutions under one roof.
+    </p>
 
-<!-- LEVEL 3 -->
-<div id="level3" class="grid" style="display:none;"></div>
+    <div class="product-grid">
 
-<script>
-const phone = "918892660649";
+        <div class="product-card">
+            <div class="product-icon">🧵</div>
+            <h3>Cotton Cloth Waste</h3>
+            <p>White cotton waste, colour cotton waste
+            and industrial cleaning cloth.</p>
+        </div>
 
-const data = {
-  cotton: {
-    name:"Cotton Waste",
-    categories:{
-      "White Banian Cloth (WHP)": ["cotton1.jpg","cotton2.jpg"],
-      "Color Cloth Waste": ["cotton3.jpg"],
-      "Others": ["cotton4.jpg"]
-    }
-  },
+        <div class="product-card">
+            <div class="product-icon">🦺</div>
+            <h3>Industrial Safety</h3>
+            <p>Safety gloves, helmets, shoes and
+            industrial protection products.</p>
+        </div>
 
-  abrasives:{
-    name:"Abrasives",
-    categories:{
-      "Sandpaper":["sand1.jpg"],
-      "Grinding Wheels":["grind1.jpg"],
-      "Others":["other.jpg"]
-    }
-  }
-};
+        <div class="product-card">
+            <div class="product-icon">📦</div>
+            <h3>Packing Materials</h3>
+            <p>Stretch film, bubble roll, foam roll,
+            PP covers and rubber mats.</p>
+        </div>
 
-let cart = {};
+        <div class="product-card">
+            <div class="product-icon">⚙️</div>
+            <h3>Abrasive Products</h3>
+            <p>Grinding wheels, cutting wheels,
+            emery rolls and sanding products.</p>
+        </div>
 
-function loadMain(){
-  main.innerHTML="";
-  for(let key in data){
-    main.innerHTML+=`
-    <div class="card" onclick="openLevel2('${key}')">
-      <img src="images/${key}-cover.jpg">
-      <h3>${data[key].name}</h3>
-    </div>`;
-  }
-}
+        <div class="product-card">
+            <div class="product-icon">🎨</div>
+            <h3>Painting Products</h3>
+            <p>Paint brushes, rollers, painting
+            accessories and thinners.</p>
+        </div>
 
-function openLevel2(key){
-  main.style.display="none";
-  level2.style.display="grid";
-  level2.innerHTML="";
+        <div class="product-card">
+            <div class="product-icon">🔥</div>
+            <h3>Welding Products</h3>
+            <p>Welding wires, welding consumables
+            and related accessories.</p>
+        </div>
 
-  for(let cat in data[key].categories){
-    level2.innerHTML+=`
-    <div class="card" onclick="openLevel3('${key}','${cat}')">
-      <h3>${cat}</h3>
-    </div>`;
-  }
-}
+        <div class="product-card">
+            <div class="product-icon">🏭</div>
+            <h3>Industrial Consumables</h3>
+            <p>General industrial maintenance
+            and production consumables.</p>
+        </div>
 
-function openLevel3(key,cat){
-  level2.style.display="none";
-  level3.style.display="grid";
-  level3.innerHTML="";
+        <div class="product-card">
+            <div class="product-icon">🧶</div>
+            <h3>Yarn Waste</h3>
+            <p>White yarn waste and colour yarn waste.</p>
+        </div>
 
-  data[key].categories[cat].forEach(img=>{
-    level3.innerHTML+=`
-    <div class="product">
-      <img src="images/${img}">
-      <p>${cat}</p>
-      <button onclick="addToCart('${cat}')">Add</button>
-    </div>`;
-  });
-}
+    </div>
+</section>
 
-function addToCart(item){
-  cart[item]=(cart[item]||0)+1;
-  updateCart();
-}
+<section class="why-us">
+    <h2>Why Choose Harsha Enterprises?</h2>
+    <div class="features">
+        <div>✔ Quality Products</div>
+        <div>✔ Competitive Pricing</div>
+        <div>✔ Reliable Supply</div>
+        <div>✔ Customer Support</div>
+    </div>
+</section>
 
-function updateCart(){
-  cartCount.innerText=Object.values(cart).reduce((a,b)=>a+b,0);
-  cartItems.innerHTML="";
-  for(let i in cart){
-    cartItems.innerHTML+=`${i} - ${cart[i]}<br>`;
-  }
-}
+<section id="contact">
+    <h2>Contact Harsha Enterprises</h2>
+    <p>For product enquiries and quotations, contact us.</p>
 
-function toggleCart(){
-  cartBox.style.display=cartBox.style.display==="block"?"none":"block";
-}
+    <div class="contact-details">
+        <p><strong>Business:</strong> Harsha Enterprises</p>
+        <p><strong>Location:</strong> Dobaspet, Bangalore Rural, Karnataka – 562111</p>
+        <p><strong>Phone:</strong> 8892660649</p>
+    </div>
 
-function checkout(){
-  let msg="Order:%0A";
-  for(let i in cart){
-    msg+=`${i} - ${cart[i]}%0A`;
-  }
-  window.open(`https://wa.me/${phone}?text=${msg}`);
-}
+    <a class="btn whatsapp"
+       href="https://wa.me/918892660649"
+       target="_blank">
+       Enquire on WhatsApp
+    </a>
 
-loadMain();
-</script>
+</section>
+
+<footer>
+    <h3>HARSHA ENTERPRISES</h3>
+    <p>Industrial Supply Solutions | Bangalore</p>
+    <p>© 2026 Harsha Enterprises. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
